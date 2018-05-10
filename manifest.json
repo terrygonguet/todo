@@ -1,0 +1,58 @@
+{
+  "applications": {
+    "gecko": {
+      "id": "todo@codegalley.io",
+      "strict_min_version": "42.0"
+    }
+  },
+
+  "author": "CodeGalley",
+
+  "background": {
+    "scripts": ["lib/browser-polyfill.min.js", "lib/lodash.min.js", "lib/moment.js", "lib/classes.js", "background/background.js"]
+  },
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16":"resources/icon-16-black.png",
+      "32":"resources/icon-32-black.png"
+    },
+    "theme_icons": [{
+      "light": "resources/icon-16-black.png",
+      "dark": "resources/icon-16-white.png",
+      "size": 16
+    }, {
+      "light": "resources/icon-32-black.png",
+      "dark": "resources/icon-32-white.png",
+      "size": 32
+    }],
+    "default_popup": "popup/list.html",
+    "default_title": "Show items"
+  },
+
+  "description": "An extension to keep track of TODO lists and items, organised in priority queues.",
+
+  "developer": {
+    "name": "Terry Gonguet",
+    "url": "http://terry.gonguet.com/CV/home/apps/cv"
+  },
+
+  "icons": {
+    "64": "resources/icon-64.png",
+    "128": "resources/icon-128.png"
+  },
+
+  "manifest_version": 2,
+
+  "name": "Project TODO",
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+
+  "permissions": ["storage"],
+
+  "version": "0.1.0"
+}
