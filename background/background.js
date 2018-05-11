@@ -1,43 +1,37 @@
-var  lists, settings;
+var  data;
 
 browser.runtime.onStartup.addListener(function () {
   settings = {
     default_priority:1,
     default_increase:1,
+    default_tick_every: { days:1 },
   }
   browser.storage.sync.set({ settings, lists: {} });
 });
 
-let saveHandler = {
-  get: function (project, method) {
-    if (method.includes && method.includes("Session")) {
-      setTimeout(function () {
-        browser.storage.sync.set(project.toJSON());
-      }, 50);
-    }
-    return project[method];
-  }
-}
-
 browser.storage.sync.get()
 .then(function (values) {
-  settings = values.settings;
-  lists = {};
+  data = values;
 }, console.error);
 
-function exportData() {
-  var data = { settings, lists:{} };
-  _.values(lists).forEach(l => _.assign(data.lists, l.toJSON()));
-  return data;
+function saveData(newData=data, clear=false) {
+  if (typeof newData === "string") newData = JSON.parse(newData);
+  return ( clear ? browser.storage.sync.clear() : Promise.resolve())
+  .then(() => {
+    data = newData;
+    return browser.storage.sync.set(newData);
+  }, console.error);
 }
 
-function importData(data) {
-  return browser.storage.sync.clear()
-  .then(() => {
-    return browser.storage.sync.set(data);
-  }, console.error)
-  .then(() => {
-    settings = data.settings;
-    lists = data.lists;
-  }, console.error);
+function createNewList(name, color) {
+  let base = {};
+  name && (base.name = name);
+  color && (base.color = color);
+  let list = List.create(_.assign(
+    base,
+    _.omit(data.settings, "default_tick_every"),
+    { tickEvery:data.settings.default_tick_every })
+  );
+  data.lists[list.id] = list;
+  return saveData();
 }

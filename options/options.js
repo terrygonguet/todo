@@ -3,7 +3,7 @@ browser.runtime.getBackgroundPage()
 .then(win => { bg = win; buildUI(); }, console.error);
 
 $("#btnExport").click(function () {
-  $("#txtData").show().val(JSON.stringify(bg.exportData(), null, 2));
+  $("#txtData").show().val(JSON.stringify(bg.data, null, 2));
 });
 $("#btnImport").click(function () {
   let text = $("#txtData").val();
@@ -11,8 +11,7 @@ $("#btnImport").click(function () {
     $("#txtData").show();
   } else {
     if (confirm("This will override all your current data !!!")) {
-      let data = JSON.parse(text);
-      bg.importData(data)
+      bg.saveData(text, true)
       .then(buildUI, alert)
       .then(() => $("#txtData").empty().hide());
     }

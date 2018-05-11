@@ -8,6 +8,17 @@
 </head>
 
 <body>
+  <nav>
+    <img src="../resources/settings.png" title="Settings" id="lblSettings">
+    <img src="../resources/create.png" title="New" id="lblNew">
+  </nav>
+  <form id="frmNew" action="." method="get">
+      <input type="text" name="name" value="" placeholder="places to visit" required id="txbName">
+  </form>
+  <select id="ddlSelected"></select>
+  <table id="tblItems">
+
+  </table>
   <script src="../lib/browser-polyfill.min.js"></script>
   <script src="../lib/jquery.js"></script>
   <script src="../lib/moment.js"></script>
