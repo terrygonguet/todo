@@ -11,7 +11,21 @@
 
 <body>
   <h1>Lists</h1>
-
+  <p>
+    <select id="ddlSelected"></select>
+    <img src="../resources/create.png" id="btnNewList" title="New List" />
+    <img src="../resources/trash.png" id="btnRemoveList" title="Remove List" />
+    (changing this will erase any unsaved changes)
+  </p>
+  <p>Name : <input placeholder="TODO" id="txbName"/></p>
+  <p>Color : <input type="color" id="txbColor"/></p>
+  <h2>Items</h2>
+  <table id="tblItems"></table>
+  <img src="../resources/create.png" id="btnNewItem" title="New Item" />
+  <button id="btnSaveList">
+    <img src="../resources/save.png" title="Save Changes" />
+    Save changes
+  </button>
   <p>
     Export <img src="../resources/export.png" id="btnExport" title="Export" />
     <img src="../resources/save.png" id="btnImport" title="Import" /> Import
@@ -22,6 +36,7 @@
   <script src="../lib/jquery.js"></script>
   <script src="../lib/moment.js"></script>
   <script src="../lib/lodash.min.js"></script>
+  <script src="../lib/classes.js"></script>
   <script src="options.js"></script>
 </body>
 

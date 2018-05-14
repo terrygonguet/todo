@@ -62,7 +62,7 @@ function saveData(newData=data, clear=false) {
   if (typeof newData === "string") newData = JSON.parse(newData);
   return ( clear ? browser.storage.sync.clear() : Promise.resolve())
   .then(() => {
-    data = newData;
+    data = _.cloneDeep(newData);
     return browser.storage.sync.set(newData);
   }, console.error);
 }
@@ -73,7 +73,7 @@ function createNewList(name, color) {
   color && (base.color = color);
   let list = List.create(_.assign(
     base,
-    _.omit(data.settings, "default_tick_every"),
+    _.pick(data.settings, ["default_priority", "default_increase"]),
     { tickEvery:data.settings.default_tick_every })
   );
   data.lists[list.id] = list;

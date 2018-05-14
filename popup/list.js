@@ -53,13 +53,13 @@ function buildUI() {
       $('<tr class="separator"><th colspan=2></th></tr>').appendTo(table);
     $(`<tr data-href="${item.url}" class="${item.url ? 'clickableRow' : ''}" title="${item.url}">`)
       .append(`<td>${item.name.slice(0,50) + (item.name.length > 50 ? '...' : '')}</td>`)
-      .append(`<td><img class="toggleItem" data-id="${item.id}" src="../resources/${item.done ? 'reset' : 'checked'}.png"/></td>`)
+      .append(`<td><img class="toggleItem" data-id="${item.id}" src="../resources/${item.done ? 'check' : 'check-box-empty'}.png"/></td>`)
       .appendTo(table);
     previousDone = item.done;
   }
   if (!bg.selected.items.length)
     $(`<tr>`)
-      .append(`<td colspan=2 class="hint">Right click in pages to create items</td>`)
+      .append(`<td colspan=2 class="hint">Right click in pages or open settings to create items</td>`)
       .appendTo(table);
   else
     $('.toggleItem').click(toggleItem);
