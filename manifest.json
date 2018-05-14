@@ -52,7 +52,7 @@
     "open_in_tab": true
   },
 
-  "permissions": ["storage"],
+  "permissions": ["storage", "contextMenus", "tabs"],
 
   "version": "0.1.0"
 }

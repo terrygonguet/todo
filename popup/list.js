@@ -27,48 +27,55 @@ function makeNew(e) {
 $('#ddlSelected')
 .change(function() {
   bg.data.selected = $(this).val();
-  bg.saveData().then(buildUI);
+  buildUI();
 });
 
 function buildUI() {
   let table = $('#tblItems').empty();
-  let selected = bg.data.lists[bg.data.selected];
   // if no selected yet we pick the first at random
-  if (!selected) {
-    selected = _.values(bg.data.lists)[0];
-    if (!selected) return;
-    bg.data.selected = selected.id;
-    bg.saveData();
+  if (!bg.selected) {
+    try {
+      bg.selected = _.values(bg.data.lists)[0];
+    } catch (e) {
+      return;
+    }
   }
-  $('body').css('background', selected.color);
+  $('body').css('background', bg.selected.color);
 
   let ddlSelected = $('#ddlSelected').show().empty();
   for (let list of _.values(bg.data.lists)) {
-    ddlSelected.append(`<option value="${list.id}" ${list.id === selected.id ? 'selected' : ''}>${list.name}</option>`);
+    ddlSelected.append(`<option value="${list.id}" ${list.id === bg.selected.id ? 'selected' : ''}>${list.name}</option>`);
   }
 
   let previousDone = null;
-  for (let item of selected.items) {
+  for (let item of bg.selected.items) {
     if (previousDone !== null && previousDone !== item.done)
-      $('<tr class="separator">').appendTo(table);
-    $(`<tr>`)
-      .append(`<td>${item.name}</td>`)
+      $('<tr class="separator"><th colspan=2></th></tr>').appendTo(table);
+    $(`<tr data-href="${item.url}" class="${item.url ? 'clickableRow' : ''}" title="${item.url}">`)
+      .append(`<td>${item.name.slice(0,50) + (item.name.length > 50 ? '...' : '')}</td>`)
       .append(`<td><img class="toggleItem" data-id="${item.id}" src="../resources/${item.done ? 'reset' : 'checked'}.png"/></td>`)
       .appendTo(table);
     previousDone = item.done;
   }
-  if (!selected.items.length)
+  if (!bg.selected.items.length)
     $(`<tr>`)
       .append(`<td colspan=2 class="hint">Right click in pages to create items</td>`)
       .appendTo(table);
   else
     $('.toggleItem').click(toggleItem);
 
+  $('.clickableRow').click(function (e) {
+    window.open($(this).data('href'));
+  });
+
 }
 
 function toggleItem(e) {
-  let id = $(this).attr('data-id');
-  let item = bg.data.lists[bg.data.selected].items.find(i => i.id === id);
-  item.done = !item.done;
-  bg.saveData().then(buildUI);
+  let id = $(this).data('id');
+  List.setDone(bg.selected, id, null);
+  buildUI();
 }
+
+window.addEventListener('unload', () => {
+  bg.saveData();
+});

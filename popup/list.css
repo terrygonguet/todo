@@ -51,7 +51,10 @@ img {
   background: #EEE;
 }
 
-.separator {
-  font-size: 0.8rem;
-  height: 3px;
+.separator th {
+  border-bottom: 1px solid grey;
+}
+
+.clickableRow {
+  cursor: pointer;
 }
