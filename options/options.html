@@ -17,15 +17,27 @@
     <img src="../resources/trash.png" id="btnRemoveList" title="Remove List" />
     (changing this will erase any unsaved changes)
   </p>
-  <p>Name : <input placeholder="TODO" id="txbName"/></p>
-  <p>Color : <input type="color" id="txbColor"/></p>
-  <h2>Items</h2>
-  <table id="tblItems"></table>
-  <img src="../resources/create.png" id="btnNewItem" title="New Item" />
-  <button id="btnSaveList">
-    <img src="../resources/save.png" title="Save Changes" />
-    Save changes
-  </button>
+  <div id="divList">
+    <p>Name <input placeholder="TODO" id="txbName"/></p>
+    <p>Color <input type="color" id="txbColor"/></p>
+    <p>Default priority <input id="txbPriority" type="number"/></p>
+    <p>Default increase <input id="txbIncrease" type="number"/></p>
+    <p>Tick interval <input id="txbTickEvery"/></p>
+    <h2>Items</h2>
+    <table id="tblItems"></table>
+    <img src="../resources/create.png" id="btnNewItem" title="New Item" />
+    <button id="btnSaveList">
+      <img src="../resources/save.png" title="Save Changes" />
+      Save changes
+    </button>
+  </div>
+  <h1>Settings</h1>
+  <div id="divSettings">
+    <p>Default priority <input id="txbSettingsPriority" type="number"/></p>
+    <p>Default increase <input id="txbSettingsIncrease" type="number"/></p>
+    <p>Default tick interval <input id="txbSettingsTickEvery"/></p>
+    <p>Include URL with add from selection <input id="txbSettingsURL" type="checkbox"/></p>
+  </div>
   <p>
     Export <img src="../resources/export.png" id="btnExport" title="Export" />
     <img src="../resources/save.png" id="btnImport" title="Import" /> Import

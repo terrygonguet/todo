@@ -24,12 +24,37 @@ $("#btnImport").click(function () {
   }
 });
 
+// list fields
 $('#txbName').change(e => {
   selected.name = $(e.target).val();
 });
 $('#txbColor').change(e => {
   selected.color = $(e.target).val();
 });
+$('#txbPriority').change(e => {
+  selected.default_priority = Number($(e.target).val());
+});
+$('#txbIncrease').change(e => {
+  selected.default_increase = Number($(e.target).val());
+});
+$('#txbTickEvery').change(e => {
+  selected.tickEvery = JSON.parse($(e.target).val());
+});
+
+// settings fields
+$('#txbSettingsPriority').change(e => {
+  bg._data.settings.default_priority = Number($(e.target).val());
+});
+$('#txbSettingsIncrease').change(e => {
+  bg._data.settings.default_increase = Number($(e.target).val());
+});
+$('#txbSettingsTickEvery').change(e => {
+  bg._data.settings.default_tick_every = JSON.parse($(e.target).val());
+});
+$('#txbSettingsURL').change(e => {
+  bg._data.settings.include_URL_with_selection = e.target.checked;
+});
+
 $('#btnNewList').click(e => {
   bg.createNewList()
   .then(buildUI, console.error);
@@ -101,4 +126,14 @@ function buildUI() {
     let val = $(e.target).val();
     List.i(selected, itemID)[propName] = (el.attr('type') == 'number' ? Number(val) : val);
   });
+
+  $('#txbPriority').val(selected.default_priority);
+  $('#txbIncrease').val(selected.default_increase);
+  $('#txbTickEvery').val(JSON.stringify(selected.tickEvery));
+
+  let settings = bg._data.settings;
+  $('#txbSettingsPriority').val(settings.default_priority);
+  $('#txbSettingsIncrease').val(settings.default_increase);
+  $('#txbSettingsTickEvery').val(JSON.stringify(settings.default_tick_every));
+  $('#txbSettingsURL')[0].checked = settings.include_URL_with_selection;
 }

@@ -4,6 +4,14 @@ body {
   background: #EEE;
 }
 
+.center {
+  text-align: center;
+}
+
+.newItemFields {
+  display: none;
+}
+
 a {
   text-decoration: underline;
   color: blue;
@@ -12,13 +20,28 @@ a {
 
 nav {
   display: block;
-  text-align: center;
   margin-top: 5px;
+}
+
+input[type='number'] {
+  width: 50px;
+}
+
+input[type='text'] {
+  width: 100px;
 }
 
 #frmNew {
   display: none;
   text-align: center;
+}
+
+#divNewItem {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
 }
 
 #ddlSelected {

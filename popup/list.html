@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <nav>
+  <nav class="center">
     <img src="../resources/settings.png" title="Settings" id="lblSettings">
     <img src="../resources/create.png" title="New" id="lblNew">
   </nav>
@@ -19,6 +19,14 @@
   <table id="tblItems">
 
   </table>
+  <div class="center" id="divNewItem">
+    <input placeholder="Item label" type="text" id="txbNewItemName" class="newItemFields"/>
+    <!-- <span class="newItemFields">Include current URL</span> -->
+    <!-- <input type="checkbox" id="txbNewItemURL" class="newItemFields"/> -->
+    <span class="newItemFields">Priority</span>
+    <input type="number" value=1 id="txbNewItemPriority" title="Priority" class="newItemFields"/>
+    <img src="../resources/create.png" title="New Item" id="btnNewItem">
+  </div>
   <script src="../lib/browser-polyfill.min.js"></script>
   <script src="../lib/jquery.js"></script>
   <script src="../lib/moment.js"></script>

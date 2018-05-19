@@ -30,6 +30,22 @@ $('#ddlSelected')
   buildUI();
 });
 
+$('#btnNewItem').click(function () {
+  let name = $('#txbNewItemName').val();
+  // if form already displayed
+  if (name) {
+    // let url = $('#txbNewItemURL:checked').length > 0;
+    let priority = $('#txbNewItemPriority').val();
+    List.addItem(bg.selected, { name, priority });
+    buildUI();
+    $('#txbNewItemName').val('');
+    $('.newItemFields').hide();
+  } else {
+    $('.newItemFields').show();
+    $('#txbNewItemPriority').val(bg.selected.default_priority);
+  }
+});
+
 function buildUI() {
   let table = $('#tblItems').empty();
   // if no selected yet we pick the first at random
