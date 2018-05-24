@@ -2,6 +2,7 @@ body {
   min-width: 300px;
   min-height: 150px;
   background: #EEE;
+  overflow-x: hidden;
 }
 
 .center {
@@ -79,5 +80,9 @@ img {
 }
 
 .clickableRow {
+  cursor: pointer;
+}
+
+.doneRow {
   cursor: pointer;
 }

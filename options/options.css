@@ -1,0 +1,40 @@
+body {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+img {
+  cursor: pointer;
+}
+
+input[type='number'] {
+  width: 50px;
+}
+
+#divList {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "settings items"
+    "new new"
+    "save save"
+}
+
+#btnNewItem {
+  grid-area: new;
+  display: block;
+  margin: 5px auto;
+}
+
+#btnSaveList {
+  grid-area: save;
+}
+
+#projectSettings {
+  grid-area: settings;
+}
+
+#divItems {
+  grid-area: items;
+}

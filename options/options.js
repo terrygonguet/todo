@@ -104,8 +104,16 @@ function buildUI() {
 
   for (let item of selected.items) {
     $(`<tr data-id="${item.id}">`)
-      .append(`<td><input class="txbItemName" value="${item.name}" placeholder="Name" data-prop="name" /></td>`)
-      .append(`<td><input class="txbItemUrl" value="${item.url}" placeholder="URL" data-prop="url" /></td>`)
+      .append(
+        $(`<td>`).append(
+          $(`<input class="txbItemName" placeholder="Name" data-prop="name" />`).val(item.name)
+        )
+      )
+      .append(
+        $(`<td>`).append(
+          $(`<input class="txbItemUrl" placeholder="URL" data-prop="url" />`).val(item.url)
+        )
+      )
       .append(`<td>Priority:<input class="txbItemPriority" value="${item.priority}" type="number" data-prop="priority" /></td>`)
       .append(`<td>increase:<input class="txbItemIncrease" value="${item.increase}" type="number" data-prop="increase" /></td>`)
       .append(`<td><img src="../resources/${item.done ? 'check' : 'check-box-empty'}.png" /></td>`)

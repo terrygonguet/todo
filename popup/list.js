@@ -30,6 +30,10 @@ $('#ddlSelected')
   buildUI();
 });
 
+$('#txbNewItemName').keydown(function (e) {
+  if (e.key === 'Enter') $('#btnNewItem').click();
+});
+
 $('#btnNewItem').click(function () {
   let name = $('#txbNewItemName').val();
   // if form already displayed
@@ -63,15 +67,17 @@ function buildUI() {
     ddlSelected.append(`<option value="${list.id}" ${list.id === bg.selected.id ? 'selected' : ''}>${list.name}</option>`);
   }
 
-  let previousDone = null;
   for (let item of bg.selected.items) {
-    if (previousDone !== null && previousDone !== item.done)
+    if (item.done) {
       $('<tr class="separator"><th colspan=2></th></tr>').appendTo(table);
+      let nbDone = bg.selected.items.filter(i => i.done).length;
+      $(`<tr class="doneRow"><td colspan=2>${nbDone} items done</td></tr>`).appendTo(table);
+      break;
+    }
     $(`<tr data-href="${item.url}" class="${item.url ? 'clickableRow' : ''}" title="${item.url}">`)
       .append(`<td>${item.name.slice(0,50) + (item.name.length > 50 ? '...' : '')}</td>`)
       .append(`<td><img class="toggleItem" data-id="${item.id}" src="../resources/${item.done ? 'check' : 'check-box-empty'}.png"/></td>`)
       .appendTo(table);
-    previousDone = item.done;
   }
   if (!bg.selected.items.length)
     $(`<tr>`)
@@ -82,6 +88,16 @@ function buildUI() {
 
   $('.clickableRow').click(function (e) {
     window.open($(this).data('href'));
+  });
+
+  $('.doneRow').click(function (e) {
+    $(this).detach();
+    for (let item of bg.selected.items.filter(i => i.done)) {
+      $(`<tr data-href="${item.url}" class="${item.url ? 'clickableRow' : ''}" title="${item.url}">`)
+        .append(`<td>${item.name.slice(0,50) + (item.name.length > 50 ? '...' : '')}</td>`)
+        .append(`<td><img class="toggleItem" data-id="${item.id}" src="../resources/${item.done ? 'check' : 'check-box-empty'}.png"/></td>`)
+        .appendTo(table);
+    }
   });
 
 }
